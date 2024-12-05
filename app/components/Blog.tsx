@@ -1,3 +1,4 @@
+"use client"
 import Link from "next/link";
 
 
@@ -7,6 +8,7 @@ export default function Blog({link, srcImg, header, content}: {
     header: string,
     content: string
 }) {
+
     return (
         <div
             className="max-w-sm bg-white border border-gray-200 rounded-lg shadow">
