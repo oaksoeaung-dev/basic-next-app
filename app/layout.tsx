@@ -32,7 +32,10 @@ export default function RootLayout({
                     <ul className={"space-y-2 font-medium"}>
                         <li>
                             <Link href={"/"} className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group">
-                                <span className="ms-3">Home</span>
+                                <span className="ms-3 flex item-center justify-center gap-3"><i className="fi fi-rr-house-chimney"></i>Home</span>
+                            </Link>
+                            <Link href={"/routing"} className={"flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group"}>
+                                <span className="ms-3 flex item-center justify-center gap-3"><i className="fi fi-rr-route"></i>Routing</span>
                             </Link>
                         </li>
                     </ul>
