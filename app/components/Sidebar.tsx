@@ -27,6 +27,11 @@ export default function Sidebar()
                             <span className="ms-3 flex item-center justify-center gap-3"><i
                                 className="fi fi-rr-back-up"></i>Data Fetching</span>
                         </Link>
+                        <Link href={"/send-data-with-post"}
+                              className={ pathName.startsWith("/send-data-with-post")  ? "flex items-center p-2 text-gray-900 rounded-lg bg-gray-100 group" : "flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group"}>
+                            <span className="ms-3 flex item-center justify-center gap-3"><i
+                                className="fi fi-rs-paper-plane-launch"></i>Send Data With Post</span>
+                        </Link>
                     </li>
                 </ul>
             </div>

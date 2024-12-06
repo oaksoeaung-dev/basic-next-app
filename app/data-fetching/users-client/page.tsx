@@ -40,7 +40,6 @@ export default function UsersClient() {
     }, []);
 
     const searchUsers = (key: string) => {
-        console.log(users?.filter(user => user.name.includes(key)));
         setFilterUsers(users?.filter(user => user.name.toLowerCase().includes(key.toLowerCase()) || user.email.toLowerCase().includes(key.toLowerCase()) || user.username.toLowerCase().includes(key.toLowerCase()) || user.phone.toLowerCase().includes(key.toLowerCase())));
     }
 
@@ -86,7 +85,6 @@ export default function UsersClient() {
                             <td className={"px-2 py-4"}>{user.username}</td>
                             <td className={"px-2 py-4"}>{user.email}</td>
                             <td className={"px-2 py-4"}>{user.phone}</td>
-
                         </tr>
                     ))
                 }
