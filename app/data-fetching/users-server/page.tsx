@@ -12,7 +12,7 @@ export default async function UsersServer()
     const users: User[] = await response.json();
     return (
         <div className={"space-y-5"}>
-            <h1 className={"text-3xl text-gray-700 font-semibold"}>Data fetching from client site</h1>
+            <h1 className={"text-3xl text-gray-700 font-semibold"}>Data fetching from server site</h1>
             <table className={"w-full"}>
                 <thead>
                 <tr>
