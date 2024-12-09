@@ -1,7 +1,8 @@
 "use server"
-import {dealSchema} from "@/app/form-handling/_schemas/deal";
-import {IDealFormState} from "@/app/form-handling/_types/deal";
-import {convertZodErrors} from "@/app/form-handling/_utils/errors";
+
+import {IDealFormState} from "@/app/form-handling/zod-validation/_types/deal";
+import {dealSchema} from "@/app/form-handling/zod-validation/_schemas/deal";
+import {convertZodErrors} from "@/app/form-handling/zod-validation/_utils/errors";
 
 export const formHandlerAction = async (formData: FormData):Promise<IDealFormState<undefined>> =>
 {

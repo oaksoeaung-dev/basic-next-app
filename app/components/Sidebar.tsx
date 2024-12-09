@@ -13,6 +13,7 @@ export default function Sidebar()
                     <SidebarMenuItem path={"/data-fetching"} pathStartsWith={true} label={"Data Fetching"} icon={"fi fi-rr-back-up"}/>
                     <SidebarMenuItem path={"/send-data-with-post"} label={"Send Data With Post"} icon={"fi fi-rr-paper-plane-launch"}/>
                     <SidebarMenuItem path={"/form-handling/html-validation"} pathStartsWith={true}  label={"Form Handling"} icon={"fi fi-rr-form"}/>
+                    <SidebarMenuItem path={"/blogs"} pathStartsWith={true}  label={"Blogs"} icon={"fi fi-rr-blog-text"}/>
                 </ul>
             </div>
         </aside>

@@ -1,7 +1,7 @@
 "use client"
-import {formHandlerAction} from "@/app/form-handling/_action/formHandler";
 import React, {useRef, useState} from "react";
-import {IStringMap} from "@/app/form-handling/_types/deal";
+import {IStringMap} from "@/app/form-handling/zod-validation/_types/deal";
+import {formHandlerAction} from "@/app/form-handling/zod-validation/_action/formHandler";
 
 export default function ZodValidation()
 {
