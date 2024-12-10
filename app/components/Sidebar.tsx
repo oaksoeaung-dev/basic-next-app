@@ -14,6 +14,7 @@ export default function Sidebar()
                     <SidebarMenuItem path={"/send-data-with-post"} label={"Send Data With Post"} icon={"fi fi-rr-paper-plane-launch"}/>
                     <SidebarMenuItem path={"/form-handling/html-validation"} pathStartsWith={true}  label={"Form Handling"} icon={"fi fi-rr-form"}/>
                     <SidebarMenuItem path={"/blogs"} pathStartsWith={true}  label={"Blogs"} icon={"fi fi-rr-blog-text"}/>
+                    <SidebarMenuItem path={"/todos"} pathStartsWith={true}  label={"Todos"} icon={"fi fi-rr-to-do"}/>
                 </ul>
             </div>
         </aside>

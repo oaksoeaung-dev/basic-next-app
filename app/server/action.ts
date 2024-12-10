@@ -1,51 +1,89 @@
 "use server"
 import {db} from "@/app/server/index";
-import {Blog} from "@/app/blogs/_utils/types";
-import {blogs} from "@/app/server/schema";
+import {blogs, todos} from "@/app/server/schema";
 import {redirect} from "next/navigation";
 import {eq} from "drizzle-orm";
 import {revalidatePath} from "next/cache";
+import {Table} from "@/app/server/utils/types";
 
-export const getBlogs = async () => {
-    const blogs: Blog[] = await db.query.blogs.findMany();
-    if(!blogs)
+
+export const getAll = async <T>(table: Table) =>
+{
+
+    let allData: T | undefined;
+    if (table == Table.BlogsTable)
     {
-        return {error: "No blog found."}
+        allData = await db.query.blogs.findMany() as T;
+    } else if (table == Table.TodosTable)
+    {
+        allData = await db.query.todos.findMany() as T;
     }
 
-    return {success: blogs}
+    if (!allData)
+    {
+        return {error: "No data found."}
+    }
+
+    return {success: allData}
 }
 
-export const createBlog = async (formData: FormData) => {
-
+export const createBlog = async (formData: FormData) =>
+{
     const blogTitle = formData.get("title")!.toString();
     const blogDescription = formData.get("description")!.toString();
-
-    await db.insert(blogs).values({title: blogTitle,description: blogDescription});
+    await db.insert(blogs).values({title: blogTitle, description: blogDescription});
     redirect("/blogs");
 }
 
-export const getBlog = async (id: number) => {
-    const blog = await db.query.blogs.findFirst({
-        where: (bolgs, {eq}) => eq(blogs.id, id),
-    });
-    // const blog = await db.select().from(blogs).where(eq(blogs.id, id)).limit(1);
-    if(!blog)
-    {
-        redirect("/blogs");
-        return {error: "No post found"};
-    }
-    return {success: blog};
+export const createTodo = async (formData: FormData) => {
+    const todoTitle = formData.get("title")!.toString();
+    await db.insert(todos).values({title: todoTitle});
+    redirect("/todos");
 }
 
-export const deleteBlog = async (formData: FormData) => {
+export const get = async <T>(table: Table, id: number) =>
+{
+    let data: T | undefined;
+    if (table == Table.BlogsTable)
+    {
+        data = await db.query.blogs.findFirst({
+            where: (bolgs, {eq}) => eq(blogs.id, id),
+        }) as T;
+
+    }
+    else if (table == Table.TodosTable)
+    {
+        data = await db.query.todos.findFirst({
+            where: (bolgs, {eq}) => eq(todos.id, id),
+        }) as T;
+    }
+
+    if (!data)
+    {
+        redirect(`/${table}`);
+        return {error: "No post found"};
+    }
+    return {success: data};
+}
+
+export const deleteBlog = async (formData: FormData) =>
+{
     const id = Number(formData.get("id"));
     await db.delete(blogs).where(eq(blogs.id, id));
     revalidatePath("/blogs");
     redirect("/blogs");
 }
 
-export const updateBlog = async (formData: FormData) => {
+export const deleteTodo = async (formData: FormData) =>
+{
+    const id = Number(formData.get("id"));
+    await db.delete(todos).where(eq(todos.id, id));
+    revalidatePath("/todos");
+    redirect("/todos");
+}
+
+export const updateBlog = async (formData: FormData) =>
+{
     const title = formData.get("title")?.toString();
     const description = formData.get("description")?.toString();
     const blogId = Number(formData.get("id"));
@@ -53,4 +91,12 @@ export const updateBlog = async (formData: FormData) => {
     revalidatePath("/blogs");
     redirect("/blogs");
 
+}
+
+export const updateTodo = async (formData: FormData) => {
+    const title = formData.get("title")!.toString();
+    const todoId = Number(formData.get("id"));
+    await db.update(todos).set({title}).where(eq(todos.id, todoId));
+    revalidatePath("/todos");
+    redirect("/todos");
 }

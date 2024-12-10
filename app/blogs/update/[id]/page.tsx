@@ -1,15 +1,16 @@
-import { getBlog, updateBlog} from "@/app/server/action";
+import {get, updateBlog} from "@/app/server/action";
 import Form from "next/form";
 import FormButton from "@/app/components/FormButton";
+import {BlogType, Table} from "@/app/server/utils/types";
 
-type BlogType = {
+type BlogParam = {
     params: Promise<{id: string}>
 }
 
-export default async function UpdateBlog({params}: BlogType)
+export default async function UpdateBlog({params}: BlogParam)
 {
     const {id} = await params;
-    const {success} = await getBlog(Number(id));
+    const {success} = await get<BlogType>(Table.BlogsTable, Number(id));
     return(
         <div className={"max-w-lg"}>
             <h2 className={"text-gray-700 font-semibold text-2xl my-5"}>Edit blog</h2>
